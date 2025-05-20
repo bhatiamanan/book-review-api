@@ -1,5 +1,6 @@
 const Review = require('../models/review.model');
 
+// Add a review for a book
 const addReview = async (req, res) => {
   try {
     const { id: bookId } = req.params;
@@ -7,6 +8,9 @@ const addReview = async (req, res) => {
     const userId = req.user.userId;
 
     // Check if user already reviewed this book
+    // Optionally, this logic can be enforced at the database level 
+    // by adding a compound unique index on { bookId, userId } in the Review schema:
+    // reviewSchema.index({ bookId: 1, userId: 1 }, { unique: true });
     const existingReview = await Review.findOne({ bookId, userId });
     if (existingReview)
       return res.status(400).json({ message: 'You already reviewed this book' });
@@ -18,6 +22,7 @@ const addReview = async (req, res) => {
   }
 };
 
+// Update a review
 const updateReview = async (req, res) => {
   try {
     const { id } = req.params;
@@ -40,6 +45,7 @@ const updateReview = async (req, res) => {
   }
 };
 
+// Delete a review
 const deleteReview = async (req, res) => {
   try {
     const { id } = req.params;

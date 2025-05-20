@@ -1,6 +1,7 @@
 const Book = require('../models/book.model');
 const Review = require('../models/review.model');
 
+// Create a new book
 const createBook = async (req, res) => {
   try {
     const { title, author, genre } = req.body;
@@ -16,6 +17,7 @@ const createBook = async (req, res) => {
   }
 };
 
+// Get all books with optional filters
 const getBooks = async (req, res) => {
   try {
     const { author, genre, page = 1, limit = 10 } = req.query;
@@ -34,6 +36,7 @@ const getBooks = async (req, res) => {
   }
 };
 
+// Get book details by ID with reviews and average rating
 const getBookDetails = async (req, res) => {
   try {
     const { id } = req.params;

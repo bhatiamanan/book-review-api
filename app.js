@@ -20,5 +20,4 @@ app.get('/', (req, res) => {
   res.send('📚 Book Review API is running');
 });
 
-
 module.exports = app;
